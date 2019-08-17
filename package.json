@@ -1,0 +1,43 @@
+{
+  "name": "yeungfanstudioblog",
+  "version": "1.0.0",
+  "description": "YeungfanStudio.com 域名下的博客系统",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chenyangfan1998/YeungfanstudioBlog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chenyangfan1998/YeungfanstudioBlog/issues"
+  },
+  "homepage": "https://github.com/Chenyangfan1998/YeungfanstudioBlog#readme",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-html-minify": "0.0.14",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
+    "imagemin": "^7.0.0",
+    "node-sass": "^4.12.0"
+  },
+  "dependencies": {},
+  "browserslist": [
+    "iOS >= 7",
+    "Android >= 4.1",
+    "last 2 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ]
+}
