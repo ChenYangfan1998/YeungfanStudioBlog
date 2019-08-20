@@ -25,11 +25,13 @@
     "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^4.2.0",
     "gulp-html-minify": "0.0.14",
+    "gulp-imagemin": "^6.0.0",
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2",
     "gulp-uglify": "^3.0.2",
-    "imagemin": "^7.0.0",
-    "node-sass": "^4.12.0"
+    "gulp-util": "^3.0.8",
+    "node-sass": "^4.12.0",
+    "stream-combiner2": "^1.1.1"
   },
   "dependencies": {},
   "browserslist": [

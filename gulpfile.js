@@ -7,53 +7,87 @@ const autoprefixer = require('gulp-autoprefixer')
 const postcss = require('gulp-postcss')
 const htmlMini = require('gulp-html-minify')
 const browserSync = require('browser-sync').create()
+const imageMin = require('gulp-imagemin')
+const combiner = require('stream-combiner2')
+const gutil = require('gulp-util')
+
+const handleError = function (err) {
+    const colors = gutil.colors
+    
+    console.log()
+    console.log(colors.red('------- Error -------'))
+    console.log('file: ' + colors.yellow(err.file))
+    console.log('line: ' + colors.yellow(err.line))
+    console.log('message: ' + colors.yellow(err.messageFormatted))
+    console.log('plugin: ' + colors.yellow(err.plugin))
+    console.log(colors.red('---------------------'))
+    console.log()
+}
 
 gulp.task('compile-js', function (cb) {
-    gulp.src('src/**/*.js', {
+    let combined = combiner.obj([
+        gulp.src('src/**/*.js', {
             sourcemaps: true
-        })
-        .pipe(babel({
+        }),
+        babel({
             presets: ['@babel/preset-env']
-        }))
-        .pipe(uglify())
-        .pipe(gulp.dest('dist', {
+        }),
+        uglify(),
+        gulp.dest('dist', {
             sourcemaps: '.'
-        }))
-        .on('error', err => {
-            console.log('Error catched at compile-js phase, detail: ')
-            console.log(err)
         })
+    ])
+
+    combined.on('error', handleError)
     cb()
 })
 
 gulp.task('compile-scss', function (cb) {
-    gulp.src('src/**/*.scss', {
-            sourcemaps: true
-        })
-        .pipe(sass())
-        .pipe(cleanCSS())
-        .pipe(postcss([autoprefixer]))
-        .pipe(gulp.dest('dist', {
-            sourcemaps: '.'
-        }))
 
-        .on('error', err => {
-            console.log("Error catched at compile-scss phase, detail: ")
-            console.log(err)
-        })
+    let combined = combiner.obj([
+        gulp.src('src/**/*.scss', {
+            sourcemaps: true
+        }),
+        sass(),
+        cleanCSS(),
+        postcss([autoprefixer]),
+        gulp.dest('dist', {
+            sourcemaps: '.'
+        }),
+
+
+    ])
+
+    combined.on('error', handleError)
     cb()
 })
 
 gulp.task('transform-html', function (cb) {
-    gulp.src('src/**/*.html')
-        .pipe(htmlMini())
-        .pipe(gulp.dest('dist'))
+    let combined = combiner.obj([
+        gulp.src('src/**/*.html'),
+        htmlMini(),
+        gulp.dest('dist')
+    ])
+
+    combined.on('error', handleError)
+    cb()
+})
+
+// todo 压缩率比较低 ｜ 图片格式暂时先试了一下png
+gulp.task('transform-image', function (cb) {
+    let combined = combiner.obj([
+        gulp.src('src/**/*.png'),
+        imageMin(),
+        gulp.dest('dist')
+    ])
+
+    combined.on('error', handleError)
     cb()
 })
 
 gulp.task('reload', function (cb) {
     browserSync.reload();
-    cb();
+    cb()
 })
 
 gulp.task('build', gulp.series([

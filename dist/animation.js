@@ -1,0 +1,2 @@
+"use strict";var checkbox=document.getElementById("disable-animation-checkbox"),isAnimationModeOff="true"===localStorage.getItem("isAnimationModeOff");if(checkbox.checked=isAnimationModeOff,checkbox.addEventListener("click",function(){isAnimationModeOff=checkbox.checked,localStorage.setItem("isAnimationModeOff",isAnimationModeOff.toString())}),!isAnimationModeOff){var animationSection=document.getElementsByClassName("full-screen")[0];animationSection.classList.add("animation-on")}
+//# sourceMappingURL=animation.js.map
