@@ -1,0 +1,61 @@
+header {
+
+  cursor: pointer;
+  position: fixed;
+
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 1;
+
+  backdrop-filter: saturate(180%) blur(20px);
+
+  padding-left: 10px;
+  display: flex;
+  height: 50px;
+  font-size: 20px;
+  align-items: center;
+  justify-content: left;
+
+  color: #353535;
+
+  .home-page-strong {
+    font-weight: bold;
+    color: #D32F2F;
+  }
+
+  .menu-wrapper {
+    visibility: hidden;
+    line-height: 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px 0 10px;
+  }
+
+  .menu-icon-item {
+    height: 3px;
+    width: 18px;
+    border-radius: 1.5px;
+    background: #8a9aaa;
+  }
+
+  .menu-icon {
+    @extend .menu-icon-item;
+    display: inline-block;
+
+    &::before, &::after {
+      @extend .menu-icon-item;
+      content: "";
+      position: absolute;
+    }
+
+    $translate-distance: 6px;
+    &::before {
+      transform: translateY(- $translate-distance);
+    }
+
+    &::after {
+      transform: translateY($translate-distance);
+    }
+  }
+}

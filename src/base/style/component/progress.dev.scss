@@ -1,0 +1,29 @@
+// 每天文章顶部的进度条样式
+$progress-height: 4px;
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  z-index: 2;
+
+  width: 100vw;
+  height: $progress-height;
+
+  background: $primary-0;
+
+  // todo
+  .progress {
+    width: 0;
+    height: $progress-height;
+
+    background: linear-gradient(to right, $primary-1, $primary-4);
+  }
+}
+
+.progress-theme-secondary {
+  background: $secondary-0;
+
+  .progress {
+    background: linear-gradient(to right, $secondary-1, $secondary-3);
+  }
+}

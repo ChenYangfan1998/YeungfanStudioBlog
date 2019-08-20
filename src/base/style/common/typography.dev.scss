@@ -1,0 +1,99 @@
+.article {
+  position: relative;
+  box-sizing: border-box;
+  padding: 0 15px;
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 300;
+
+  line-height: 1.8;
+  word-break: break-word;
+  text-align: justify;
+
+  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+  }
+
+  h1 {
+    font-size: 40px;
+    margin: 10px 0 20px 0;
+  }
+
+  h2 {
+    font-size: 32px;
+    margin: 20px 0 15px 0;
+  }
+
+  h3 {
+    font-size: 28px;
+    margin: 15px 0 10px 0;
+  }
+
+  h4 {
+    font-size: 24px;
+    margin: 10px 0 5px 0;
+  }
+
+  h5 {
+    font-size: 20px;
+    margin: 5px 0 5px 0;
+  }
+
+  h6 {
+    font-size: 16px;
+    margin: 5px 0 5px 0;
+  }
+
+  p, li{
+    margin: 7px 0;
+  }
+
+  ul,
+  ol {
+    list-style: none;
+    padding-left: 1em;
+    margin-top: .3em;
+    margin-bottom: .8em;
+  }
+
+  ul > li::before {
+    content: "\02022";
+    display: inline-block;
+    color: #D32F2F;
+    width: 1em;
+    margin-left: -1em;
+  }
+
+  ol {
+    // 一部分定义在无序列表定义中
+    counter-reset: li;
+    margin: 0 0 0 .5em;
+
+    li {
+      text-align: left;
+    }
+  }
+
+  ol > li::before {
+    font-family: "Courier", "Courier New", monospace !important;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 0;
+    content: counter(li) '.';
+    color: #D32F2F;
+    display: inline;
+    width: 2em;
+    margin-left: -1.5em;
+    margin-right: 0.5em;
+    text-align: right;
+    counter-increment: li;
+  }
+
+  blockquote {
+    margin: 15px 0;
+    padding: 0 15px;
+    border-left: #D32F2F 2px solid;
+  }
+}
