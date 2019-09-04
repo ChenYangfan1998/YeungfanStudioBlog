@@ -21,6 +21,7 @@ function generateCatalog() {
         case 'H5':
         case 'H6':
             insertCatalogItem(node)
+            setLinkNode(node)
             break
 
         default:
@@ -39,9 +40,7 @@ function generateCatalog() {
             scrollCheckPoints.some(checkPoint => {
                 // 2: 避免临界值浮点数比较等情况
                 if (currentScrollTop + scrollToOffset + 2 > checkPoint.top) {
-                    if (!ifContentClass(checkPoint.catalogItem.classList, 'catalog-item-focuson')) {
-                        focusonCatalogItem(checkPoint.catalogItem, 'catalog-item-focuson')
-                    }
+                    focusonCatalogItem(checkPoint.catalogItem, 'catalog-item-focuson')
                     return false
                 }
             })
@@ -67,6 +66,20 @@ function generateCatalog() {
             window.scrollTo(0, nodeTop - scrollToOffset)
         })
     }
+
+    function setLinkNode(node) {
+        // <h1><a></a></h1?
+        const content = document.createElement('a')
+        content.innerHTML = node.innerHTML
+        content.href = '#' + node.id
+        node.innerHTML = ''
+        node.append(content)
+    }
+
+    const backToHome = document.createElement('div')
+    backToHome.className = 'back-to-home-button'
+    backToHome.innerText = '回到博客主页'
+    targetHost.append(backToHome)
 }
 
 
@@ -80,18 +93,6 @@ function getNodeTop(node) {
     }
 
     return actualTop
-}
-
-function ifContentClass(classList, className) {
-    let result = false
-    for (const classItem of classList) {
-        if (className === classItem) {
-            result = true
-            break
-        }
-    }
-    if (result) console.log(123)
-    return result
 }
 
 function focusonCatalogItem(node, className) {

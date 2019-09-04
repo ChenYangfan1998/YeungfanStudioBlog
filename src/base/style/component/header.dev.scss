@@ -1,17 +1,18 @@
-header {
+@import "./../variable/common-variable.dev";
+@import "./../theme/theme-color.dev";
 
-  cursor: pointer;
+header {
   position: fixed;
 
   width: 100%;
   background-color: rgba(255, 255, 255, 0.5);
-  z-index: 1;
+  z-index: 2;
 
   backdrop-filter: saturate(180%) blur(20px);
 
   padding-left: 10px;
   display: flex;
-  height: 50px;
+  height: $header-height;
   font-size: 20px;
   align-items: center;
   justify-content: left;
@@ -20,11 +21,12 @@ header {
 
   .home-page-strong {
     font-weight: bold;
-    color: #D32F2F;
+    color: $primary-4;
   }
 
   .menu-wrapper {
     visibility: hidden;
+    cursor: pointer;
     line-height: 0;
     height: 50px;
     display: flex;
@@ -36,7 +38,8 @@ header {
     height: 3px;
     width: 18px;
     border-radius: 1.5px;
-    background: #8a9aaa;
+    background: $blue-grey-300;
+    transition: all .2s ease-out;
   }
 
   .menu-icon {
@@ -56,6 +59,32 @@ header {
 
     &::after {
       transform: translateY($translate-distance);
+    }
+  }
+
+  .menu-icon-active {
+    &::before, &::after {
+      width: 12px;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+      transform-origin: left top;
+    }
+    &::after {
+      transform: rotate(-45deg);
+      transform-origin: left bottom;
+    }
+  }
+
+  .home-page-clickable {
+    cursor: pointer;
+    padding: 8px 0;
+    transition: .2s ease-out all;
+    text-decoration: underline solid white;
+
+    &:hover {
+      text-decoration: underline solid $primary-1;
     }
   }
 }

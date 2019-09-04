@@ -7,7 +7,7 @@ const browserSync = require('browser-sync').create()
 const imageMin = require('gulp-imagemin')
 const combiner = require('stream-combiner2')
 const gutil = require('gulp-util')
-const clean = require('gulp-clean')
+const del = require('del')
 
 const handleError = function (err) {
     const colors = gutil.colors
@@ -23,8 +23,7 @@ const handleError = function (err) {
 }
 
 gulp.task('clean', function (cb) {
-    gulp.src('dist/', {read: false})
-        .pipe(clean())
+    del(['/dist/**/*'])
     cb()
 })
 
@@ -83,9 +82,10 @@ gulp.task('reload', function (cb) {
     cb()
 })
 
-gulp.task('build', gulp.series(
+gulp.task('build', gulp.series([
+    'clean',
     gulp.parallel('js', 'scss', 'html')
-))
+]))
 
 gulp.task('default', gulp.series('build', function () {
     browserSync.init({
@@ -94,7 +94,7 @@ gulp.task('default', gulp.series('build', function () {
         }
     })
 
-    gulp.watch(['src/**/*.js'], gulp.series(['js', 'reload']))
-    gulp.watch(['src/**/*.scss'], gulp.series(['scss', 'reload']))
-    gulp.watch(['src/**/*.html'], gulp.series(['html', 'reload']))
+    gulp.watch(['src/**/*.js'], gulp.series(['clean', 'js', 'reload']))
+    gulp.watch(['src/**/*.scss'], gulp.series(['clean', 'scss', 'reload']))
+    gulp.watch(['src/**/*.html'], gulp.series(['clean', 'html', 'reload']))
 }))

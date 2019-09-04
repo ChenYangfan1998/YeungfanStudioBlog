@@ -1,0 +1,41 @@
+@import "./../variable/common-variable.dev";
+@import "./../theme/theme-color.dev";
+
+.welcome-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+  width: 100vw;
+
+  font-weight: bold;
+
+
+  &-title {
+    font-size: $welcome-page-font-size;
+  }
+}
+
+.welcome-page-yeungfan {
+  color: $primary-4;
+}
+
+.welcome-page-studio {
+  color: $grey-700;
+}
+
+.welcome-page-blog {
+  color: $grey-500;
+}
+
+.welcome-animation {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+
+  height: 100vh;
+  width: 100vw;
+
+  background: $grey-50;
+}

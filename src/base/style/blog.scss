@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+SC:300,400&display=swap');
+
 @import "./setting/reset.dev.scss";
 @import "theme/theme-color.dev.scss";
 @import "./component/catalog.dev.scss";
 @import "./component/progress.dev.scss";
 @import "./component/header.dev.scss";
 @import "./common/typography.dev.scss";
-@import "./common/blog-layout.dev.scss";
+@import "./layout/blog-layout.dev";

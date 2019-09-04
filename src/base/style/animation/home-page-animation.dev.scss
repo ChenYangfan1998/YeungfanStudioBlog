@@ -1,0 +1,50 @@
+@import "./../variable/common-variable.dev";
+@import "./../theme/theme-color.dev";
+
+.welcome-page-yeungfan, .welcome-page-studio {
+  position: relative;
+  animation: yeungfan-studio-animation $animation-time;
+}
+
+.welcome-page-blog {
+  color: $grey-500;
+  position: relative;
+  animation: blog-animation $animation-time;
+}
+
+.welcome-page-animation {
+  
+}
+
+@keyframes yeungfan-studio-animation {
+  0% {
+    left: 8vmin;
+    animation-timing-function: linear;
+  }
+  40% {
+    left: 6vmin;
+    animation-timing-function: cubic-bezier(0, 0, 0, 1);
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes blog-animation {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+    left: -4vmin;
+    animation-timing-function: cubic-bezier(0, 0, 0, 1);
+  }
+  100% {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+@keyframes background-animation {
+  
+}

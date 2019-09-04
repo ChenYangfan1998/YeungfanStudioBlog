@@ -18,10 +18,10 @@
   "homepage": "https://github.com/Chenyangfan1998/YeungfanstudioBlog#readme",
   "devDependencies": {
     "browser-sync": "^2.26.7",
+    "del": "^5.1.0",
     "eslint": "^6.3.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^6.1.0",
-    "gulp-clean": "^0.4.0",
     "gulp-clean-css": "^4.2.0",
     "gulp-html-minify": "0.0.14",
     "gulp-imagemin": "^6.0.0",
