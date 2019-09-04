@@ -11,23 +11,34 @@ export default function () {
 
     const menuWrapper = document.getElementsByClassName('menu-wrapper')[0]
     const sidebar = document.getElementsByClassName('sidebar')[0]
+    const menuIcon = document.getElementsByClassName('menu-icon')[0]
+    const backToHomeButton = document.getElementsByClassName('back-to-home-button')[0]
     const resizeHandler = () => {
         if (window.innerWidth < 1100) {
             menuWrapper.style.visibility = 'unset'
-            sidebar.style.display = 'none'
+            sidebar.classList.add('sidebar-small-device')
+            backToHomeButton.classList.add('back-to-home-button-show')
         } else {
             menuWrapper.style.visibility = 'hidden'
-            sidebar.style.display = 'unset'
+            sidebar.classList.remove('sidebar-small-device')
+            backToHomeButton.classList.remove('back-to-home-button-show')
         }
     }
 
     resizeHandler()
     window.onresize = resizeHandler
 
-    const menuWrapperClickHandler = () => {
-        sidebar.style.display === 'unset' ? sidebar.style.display = 'none' : sidebar.style.display = 'unset'
-
+    const changeMenuState = () => {
+        sidebar.classList.toggle('sidebar-small-device-active')
+        menuIcon.classList.toggle('menu-icon-active')
     }
+    const closeMenuState = () => {
+        sidebar.classList.remove('sidebar-small-device-active')
+        menuIcon.classList.remove('menu-icon-active')
+    }
+    menuWrapper.addEventListener('click', changeMenuState)
 
-    menuWrapper.addEventListener('click', menuWrapperClickHandler)
+    const article = document.getElementsByClassName('article')[0]
+    article.addEventListener('click', closeMenuState)
+
 }

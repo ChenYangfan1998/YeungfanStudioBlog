@@ -5,7 +5,7 @@ header {
 
   width: 100%;
   background-color: rgba(255, 255, 255, 0.5);
-  z-index: 1;
+  z-index: 2;
 
   backdrop-filter: saturate(180%) blur(20px);
 
@@ -47,6 +47,7 @@ header {
       @extend .menu-icon-item;
       content: "";
       position: absolute;
+      transition: all .2s ease-out;
     }
 
     $translate-distance: 6px;
@@ -56,6 +57,21 @@ header {
 
     &::after {
       transform: translateY($translate-distance);
+    }
+  }
+
+  .menu-icon-active {
+    &::before, &::after {
+      width: 12px;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+      transform-origin: left top;
+    }
+    &::after {
+      transform: rotate(-45deg);
+      transform-origin: left bottom;
     }
   }
 }

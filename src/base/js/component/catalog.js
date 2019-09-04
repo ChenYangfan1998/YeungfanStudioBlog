@@ -39,9 +39,7 @@ function generateCatalog() {
             scrollCheckPoints.some(checkPoint => {
                 // 2: 避免临界值浮点数比较等情况
                 if (currentScrollTop + scrollToOffset + 2 > checkPoint.top) {
-                    if (!ifContentClass(checkPoint.catalogItem.classList, 'catalog-item-focuson')) {
-                        focusonCatalogItem(checkPoint.catalogItem, 'catalog-item-focuson')
-                    }
+                    focusonCatalogItem(checkPoint.catalogItem, 'catalog-item-focuson')
                     return false
                 }
             })
@@ -67,6 +65,11 @@ function generateCatalog() {
             window.scrollTo(0, nodeTop - scrollToOffset)
         })
     }
+
+    const backToHome = document.createElement('div')
+    backToHome.className = 'back-to-home-button'
+    backToHome.innerText = '回到博客主页'
+    targetHost.append(backToHome)
 }
 
 
@@ -80,18 +83,6 @@ function getNodeTop(node) {
     }
 
     return actualTop
-}
-
-function ifContentClass(classList, className) {
-    let result = false
-    for (const classItem of classList) {
-        if (className === classItem) {
-            result = true
-            break
-        }
-    }
-    if (result) console.log(123)
-    return result
 }
 
 function focusonCatalogItem(node, className) {

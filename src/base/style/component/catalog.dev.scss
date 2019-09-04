@@ -20,6 +20,11 @@
   }
 }
 
+.catalog-small-device {
+  position: fixed;
+  right: -100%;
+}
+
 .catalog-h1,
 .catalog-h2,
 .catalog-h3,
@@ -72,4 +77,29 @@
 
 .catalog-item-focuson {
   background-color: $grey-100;
+}
+
+.back-to-home-button{
+  cursor: pointer;
+  display: none;
+
+  padding: 5px 0 5px 20px;
+  margin-top: 15px;
+  box-sizing: border-box;
+  width: 100%;
+
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+
+  color: #3a4a5a;
+  font-family: 'Noto Serif SC', serif;
+  transition: .2s all ease-out;
+
+  &:hover {
+    background: #eeeeee;
+  }
+}
+
+.back-to-home-button-show {
+  display: block;
 }

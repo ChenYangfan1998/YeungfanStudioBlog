@@ -7,7 +7,7 @@
 
   line-height: 1.8;
   word-break: break-word;
-  text-align: justify;
+  word-wrap: break-word;
 
   overflow-scrolling: touch;
   -webkit-overflow-scrolling: touch;
@@ -67,7 +67,6 @@
   }
 
   ol {
-    // 一部分定义在无序列表定义中
     counter-reset: li;
     margin: 0 0 0 .5em;
 
@@ -85,8 +84,8 @@
     color: #D32F2F;
     display: inline;
     width: 2em;
-    margin-left: -1.5em;
-    margin-right: 0.5em;
+    margin-left: -1.6em;
+    margin-right: .4em;
     text-align: right;
     counter-increment: li;
   }
