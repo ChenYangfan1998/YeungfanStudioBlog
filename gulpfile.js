@@ -8,6 +8,10 @@ const imageMin = require('gulp-imagemin')
 const combiner = require('stream-combiner2')
 const gutil = require('gulp-util')
 const del = require('del')
+const markdown = require('gulp-markdown')
+const mdToBlog = require('./utils/md-to-blog')
+const configToHomePage = require('./utils/config-to-home-page')
+
 
 const handleError = function (err) {
     const colors = gutil.colors
@@ -28,7 +32,7 @@ gulp.task('clean', function (cb) {
 })
 
 gulp.task('js', function (cb) {
-    gulp.src('src/**/*.js', )
+    gulp.src(['src/**/*.js', '!src/**/*.config.js'], )
         .pipe(gulp.dest('dist'))
 
     cb()
@@ -36,7 +40,7 @@ gulp.task('js', function (cb) {
 
 gulp.task('scss', function (cb) {
 
-    let combined = combiner.obj([
+    const combined = combiner.obj([
         gulp.src(['src/**/*.scss', '!src/**/*.dev.scss'], {
             sourcemaps: true
         }),
@@ -55,9 +59,21 @@ gulp.task('scss', function (cb) {
 })
 
 gulp.task('html', function (cb) {
-    let combined = combiner.obj([
-        gulp.src('src/**/*.html'),
+    const combined = combiner.obj([
+        gulp.src(['src/**/*.html', '!src/**/*.template.html', '!src/index.html']),
         htmlMini(),
+        gulp.dest('dist')
+    ])
+
+    combined.on('error', handleError)
+    cb()
+})
+
+gulp.task('md', function (cb) {
+    const combined = combiner.obj([
+        gulp.src('src/**/*.md'),
+        markdown(),
+        mdToBlog(),
         gulp.dest('dist')
     ])
 
@@ -67,7 +83,7 @@ gulp.task('html', function (cb) {
 
 // todo 压缩率比较低 ｜ 图片格式暂时先试了一下png
 gulp.task('image', function (cb) {
-    let combined = combiner.obj([
+    const combined = combiner.obj([
         gulp.src('src/**/*.png'),
         imageMin(),
         gulp.dest('dist')
@@ -82,9 +98,26 @@ gulp.task('reload', function (cb) {
     cb()
 })
 
+gulp.task('build-index-page', function (cb) {
+    // const combined = combiner.obj([
+    //     gulp.src('src/index.html'),
+    //     configToHomePage(),
+    //     gulp.dest('dist')
+    // ])
+    //
+    // combined.on('error', handleError)
+    // cb()
+
+    gulp.src('src/index.html')
+        .pipe(configToHomePage())
+        .pipe(gulp.dest('dist'))
+    cb()
+})
+
 gulp.task('build', gulp.series([
     'clean',
-    gulp.parallel('js', 'scss', 'html')
+    gulp.parallel('js', 'scss', 'md', 'html', 'image'),
+    'build-index-page'
 ]))
 
 gulp.task('default', gulp.series('build', function () {
@@ -96,5 +129,10 @@ gulp.task('default', gulp.series('build', function () {
 
     gulp.watch(['src/**/*.js'], gulp.series(['clean', 'js', 'reload']))
     gulp.watch(['src/**/*.scss'], gulp.series(['clean', 'scss', 'reload']))
-    gulp.watch(['src/**/*.html'], gulp.series(['clean', 'html', 'reload']))
+    gulp.watch(['src/**/*.html', '!src/index.html'], gulp.series(['clean', 'html', 'reload']))
+    gulp.watch(['src/**/*.md'], gulp.series(['clean', 'md', 'reload']))
+    gulp.watch(['src/**/*.png'], gulp.series(['clean', 'image', 'reload']))
+    gulp.watch(['src/**/*.config.json'], gulp.series(['clean', 'build-index-page', 'reload']))
+    gulp.watch(['src/index.html'], gulp.series(['clean', 'build-index-page', 'reload']))
+
 }))

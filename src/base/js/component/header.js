@@ -4,11 +4,10 @@ export default function () {
         '<div class=\'menu-wrapper\'>' +
         '   <span class=\'menu-icon\'></span>' +
         '</div>' +
-        '<div class=\'home-page-clickable\'>' +
+        '<a class=\'home-page-clickable\' href="/">' +
         '   <span class=\'home-page-strong\'>Yeungfan&nbsp;</span>Studio' +
-        '</div>'
+        '</a>'
     document.body.firstChild.before(header)
-
     const menuWrapper = document.getElementsByClassName('menu-wrapper')[0]
     const sidebar = document.getElementsByClassName('sidebar')[0]
     const menuIcon = document.getElementsByClassName('menu-icon')[0]

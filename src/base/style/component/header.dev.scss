@@ -3,6 +3,7 @@
 
 header {
   position: fixed;
+  font-weight: bold;
 
   width: 100%;
   background-color: rgba(255, 255, 255, 0.5);
@@ -17,11 +18,10 @@ header {
   align-items: center;
   justify-content: left;
 
-  color: #353535;
+  color: $grey-600;
 
   .home-page-strong {
-    font-weight: bold;
-    color: $primary-4;
+    color: $secondary-800;
   }
 
   .menu-wrapper {
@@ -81,10 +81,10 @@ header {
     cursor: pointer;
     padding: 8px 0;
     transition: .2s ease-out all;
-    text-decoration: underline solid white;
+    text-decoration: underline solid transparent;
 
     &:hover {
-      text-decoration: underline solid $primary-1;
+      text-decoration: underline solid $secondary-200;
     }
   }
 }

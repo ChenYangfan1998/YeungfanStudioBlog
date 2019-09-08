@@ -9,12 +9,12 @@
   width: 100vw;
   height: $progress-height;
 
-  background: $primary-0;
+  background: $primary-100;
 
   .progress {
     width: 0;
     height: $progress-height;
 
-    background: linear-gradient(to right, $primary-2, $primary-4);
+    background: linear-gradient(to right, $primary-200, $primary-600);
   }
 }

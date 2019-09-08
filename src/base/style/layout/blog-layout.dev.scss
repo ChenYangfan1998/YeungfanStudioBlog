@@ -1,7 +1,5 @@
 @import "./../variable/common-variable.dev";
- body {
-   scroll-behavior: smooth;
- }
+@import "./../theme/theme-color.dev";
 
 .blog-layout-container {
   display: flex;
@@ -14,8 +12,9 @@
 
   .sidebar {
     box-sizing: border-box;
-    position: relative;
-    margin-right: 10px;
+    position: sticky;
+    height: calc(100vh - #{$page-up-down-padding});
+    top: $page-up-down-padding + $catalog-title-padding + 20px; // 默认值
     z-index: 1;
   }
 
@@ -24,6 +23,7 @@
     top: 0;
     left: -100%;
     height: 100vh;
+    margin-top: 0;
 
     padding: $header-height 0 0 0;
 
@@ -32,7 +32,7 @@
 
     transition: all .3s ease-out;
     border-right: unset;
-    box-shadow: 1px 0 10px 0 #aaaaaaaa;
+    box-shadow: 1px 0 10px 0 $grey-400;
 
     &::after {
       opacity: 0;
@@ -45,7 +45,7 @@
       z-index: -1;
       height: 200vh;
       width: 200vw;
-      background: #eeeeee88;
+      background: rgba(0, 0, 0, .1);
 
       // 设置鼠标事件透明
       pointer-events: none;
@@ -59,6 +59,7 @@
 
   .sidebar-small-device-active {
     left: 0;
+
     &::after {
       opacity: 1;
 

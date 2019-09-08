@@ -2,10 +2,10 @@
 @import "./../theme/theme-color.dev";
 
 .catalog {
+  box-sizing: border-box;
   font-family: 'Noto Serif SC', serif;
-  position: sticky;
   padding-top: $catalog-title-padding;
-  top: $page-up-down-padding + $catalog-title-padding + 20px;  // 默认值
+  padding-right: 10px;
   overflow: auto;
   max-height: calc(100vh - 2 * #{$page-up-down-padding});
   width: $catalog-width;
@@ -16,8 +16,8 @@
     left: 12px;
     bottom: $catalog-title-padding;
 
-    font-size: 1.6em;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: bold;
   }
 }
 
@@ -34,12 +34,12 @@
 .catalog-h6 {
   line-height: 2;
   box-sizing: border-box;
-  border-left: 2px solid $primary-2;
+  border-left: 2px solid $secondary-600;
   transition: ease-out all .2s;
   cursor: pointer;
 
   &:hover {
-    border-color: $primary-4;
+    border-color: $secondary-700;
     background: $grey-200;
   }
 }
@@ -84,8 +84,10 @@
 .back-to-home-button{
   cursor: pointer;
   display: none;
+  position: relative;
+  top: 10px;
 
-  padding: 5px 0 5px 20px;
+  padding: 5px 5px 5px 20px;
   margin-top: 15px;
   box-sizing: border-box;
   width: 100%;

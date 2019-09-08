@@ -7,13 +7,8 @@
 }
 
 .welcome-page-blog {
-  color: $grey-500;
   position: relative;
   animation: blog-animation $animation-time;
-}
-
-.welcome-page-animation {
-  
 }
 
 @keyframes yeungfan-studio-animation {
@@ -45,6 +40,7 @@
   }
 }
 
-@keyframes background-animation {
-  
+.welcome-page-background {
+  perspective: 10px;
+  transform-style: preserve-3d;
 }

@@ -10,6 +10,13 @@ function generateCatalog() {
     const article = document.getElementsByClassName(articleClassName)[0]
     const targetHost = document.getElementsByClassName(targetHostClassName)[0]
     const catalogNode = document.createElement('div')
+
+    const backToHome = document.createElement('a')
+    backToHome.className = 'back-to-home-button'
+    backToHome.innerText = '回到博客主页'
+    backToHome.href = '/'
+    targetHost.append(backToHome)
+
     catalogNode.className = 'catalog'
     targetHost.append(catalogNode)
     for (let node of article.childNodes) {
@@ -75,11 +82,6 @@ function generateCatalog() {
         node.innerHTML = ''
         node.append(content)
     }
-
-    const backToHome = document.createElement('div')
-    backToHome.className = 'back-to-home-button'
-    backToHome.innerText = '回到博客主页'
-    targetHost.append(backToHome)
 }
 
 
