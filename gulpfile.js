@@ -81,10 +81,9 @@ gulp.task('md', function (cb) {
     cb()
 })
 
-// todo 压缩率比较低 ｜ 图片格式暂时先试了一下png
 gulp.task('image', function (cb) {
     const combined = combiner.obj([
-        gulp.src('src/**/*.png'),
+        gulp.src(['src/**/*.png', 'src/**/*.jpg', 'src/**/*.jpeg']),
         imageMin(),
         gulp.dest('dist')
     ])
@@ -99,19 +98,19 @@ gulp.task('reload', function (cb) {
 })
 
 gulp.task('build-index-page', function (cb) {
-    // const combined = combiner.obj([
-    //     gulp.src('src/index.html'),
-    //     configToHomePage(),
-    //     gulp.dest('dist')
-    // ])
-    //
-    // combined.on('error', handleError)
-    // cb()
+    const combined = combiner.obj([
+        gulp.src('src/index.html'),
+        configToHomePage(),
+        gulp.dest('dist')
+    ])
 
-    gulp.src('src/index.html')
-        .pipe(configToHomePage())
-        .pipe(gulp.dest('dist'))
+    combined.on('error', handleError)
     cb()
+
+    // gulp.src('src/index.html')
+    //     .pipe(configToHomePage())
+    //     .pipe(gulp.dest('dist'))
+    // cb()
 })
 
 gulp.task('build', gulp.series([

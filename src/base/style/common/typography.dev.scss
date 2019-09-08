@@ -57,8 +57,12 @@
     margin: 5px 0 5px 0;
   }
 
-  p, li {
+  p {
     margin: 7px 0;
+  }
+
+  li {
+    margin: 3px;
   }
 
   ul,
@@ -134,6 +138,10 @@
     &:hover {
       text-decoration: underline solid $blue-grey-400;
     }
+  }
+
+  li > a {
+    color: $primary-700;
   }
 
   img {
