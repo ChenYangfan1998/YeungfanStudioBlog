@@ -10,7 +10,7 @@ module.exports = function () {
         }
 
         if (file.isStream()) {
-            callback(new PluginError('md-to-blog', 'Streaming not supported'))
+            callback(new PluginError('insert-to-blog', 'Streaming not supported'))
             return
         }
 
@@ -27,13 +27,15 @@ module.exports = function () {
                             const config = JSON.parse(configJson.toString())
                             const article = file.contents.toString()
                             file.contents = Buffer.from(data.toString().replace('%article%', article).replace('%title%', config.title))
+                            file.basename = 'index.html'
+
                             callback(null, file)
                         }
                     })
                 }
             })
         } catch (error) {
-            callback(new PluginError('md-to-blog', error, {fileName: file.path}))
+            callback(new PluginError('insert-to-blog', error, {fileName: file.path}))
         }
     })
 }

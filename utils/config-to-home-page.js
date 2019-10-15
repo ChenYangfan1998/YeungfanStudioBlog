@@ -36,14 +36,16 @@ module.exports = function () {
             months.sort((a, b) => {
                 const aStrList = a.split('-')
                 const bStrList = b.split('-')
-                if (aStrList[0] < bStrList[0]) {
+
+                if (parseInt(aStrList[0]) < parseInt(bStrList[0])) {
                     return 1
-                } else if (aStrList[0] > bStrList[0]) {
+                } else if (parseInt(aStrList[0]) > parseInt(bStrList[0])) {
                     return -1
                 } else {
-                    return aStrList[1] < bStrList[1] ? 1 : -1
+                    return parseInt(aStrList[1]) < parseInt(bStrList[1]) ? 1 : -1
                 }
             })
+
             for (const monthDir of months) {
                 const monthPath = v2Path + '/' + monthDir
                 if (fs.statSync(monthPath).isDirectory()) {
@@ -67,7 +69,7 @@ module.exports = function () {
             const recommendedTodayTemplate = await readFile(__dirname + '/../template/home-page-component/recommended-today.template.html')
 
             let content = ''
-            for (const configPerMonth of monthConfigList) {
+            monthConfigList.forEach(configPerMonth => {
                 let articles = ''
                 let date = ''
                 configPerMonth.sort((a, b) => {
@@ -86,7 +88,7 @@ module.exports = function () {
                 content += homePagePerMonthTemplate.toString()
                     .replace('%month%', dateToChinese(date))
                     .replace('%articles%', articles)
-            }
+            })
 
             const recommendedTodayConfigJson = await readFile(__dirname + '/../src/recommend.config.json')
             const recommendedTodayConfig = JSON.parse(recommendedTodayConfigJson.toString())
@@ -100,6 +102,7 @@ module.exports = function () {
                 file.contents.toString().replace('%content%', content)
                     .replace('%recommended-today%', recommendedTodayContent)
             )
+
             callback(null, file)
         } catch (error) {
             callback(new PluginError('config-to-home-page', error, {fileName: file.path}))

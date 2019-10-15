@@ -132,7 +132,7 @@
   }
 
   a {
-    text-decoration: underline solid white;
+    text-decoration: underline solid transparent;
     transition: .2s all ease-out;
 
     &:hover {
@@ -140,7 +140,7 @@
     }
   }
 
-  li > a {
+  li > a, p > a {
     color: $primary-700;
   }
 

@@ -9,7 +9,7 @@ const combiner = require('stream-combiner2')
 const gutil = require('gulp-util')
 const del = require('del')
 const markdown = require('gulp-markdown')
-const mdToBlog = require('./utils/md-to-blog')
+const insertToBlog = require('./utils/insert-to-blog')
 const configToHomePage = require('./utils/config-to-home-page')
 
 
@@ -60,9 +60,21 @@ gulp.task('scss', function (cb) {
 
 gulp.task('html', function (cb) {
     const combined = combiner.obj([
-        gulp.src(['src/**/*.html', '!src/**/*.template.html', '!src/index.html']),
+        gulp.src(['src/**/*.html', '!src/**/*.template.html', '!src/index.html', '!src/blog/v2/**/*.article.html']),
         htmlMini(),
         gulp.dest('dist')
+    ])
+
+    combined.on('error', handleError)
+    cb()
+})
+
+gulp.task('article-html', function (cb) {
+    const combined = combiner.obj([
+        gulp.src(['src/blog/v2/**/*.article.html']),
+        insertToBlog(),
+        htmlMini(),
+        gulp.dest('dist/blog/v2')
     ])
 
     combined.on('error', handleError)
@@ -73,7 +85,8 @@ gulp.task('md', function (cb) {
     const combined = combiner.obj([
         gulp.src('src/**/*.md'),
         markdown(),
-        mdToBlog(),
+        insertToBlog(),
+        htmlMini(),
         gulp.dest('dist')
     ])
 
@@ -106,16 +119,11 @@ gulp.task('build-index-page', function (cb) {
 
     combined.on('error', handleError)
     cb()
-
-    // gulp.src('src/index.html')
-    //     .pipe(configToHomePage())
-    //     .pipe(gulp.dest('dist'))
-    // cb()
 })
 
 gulp.task('build', gulp.series([
     'clean',
-    gulp.parallel('js', 'scss', 'md', 'html', 'image'),
+    gulp.parallel('js', 'scss', 'md', 'article-html', 'html', 'image'),
     'build-index-page'
 ]))
 
@@ -128,7 +136,8 @@ gulp.task('default', gulp.series('build', function () {
 
     gulp.watch(['src/**/*.js'], gulp.series(['clean', 'js', 'reload']))
     gulp.watch(['src/**/*.scss'], gulp.series(['clean', 'scss', 'reload']))
-    gulp.watch(['src/**/*.html', '!src/index.html'], gulp.series(['clean', 'html', 'reload']))
+    gulp.watch(['src/**/*.html', '!src/index.html', '!src/blog/v2/**/*.article.html'], gulp.series(['clean', 'html', 'reload']))
+    gulp.watch(['src/blog/v2/**/*.article.html'], gulp.series(['clean', 'article-html', 'reload']))
     gulp.watch(['src/**/*.md'], gulp.series(['clean', 'md', 'reload']))
     gulp.watch(['src/**/*.png'], gulp.series(['clean', 'image', 'reload']))
     gulp.watch(['src/**/*.config.json'], gulp.series(['clean', 'build-index-page', 'reload']))
