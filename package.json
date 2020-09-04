@@ -29,7 +29,7 @@
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2",
     "gulp-util": "^3.0.8",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "plugin-error": "^1.0.1",
     "stream-combiner2": "^1.1.1",
     "through2": "^3.0.1"
